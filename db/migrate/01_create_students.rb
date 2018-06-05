@@ -7,5 +7,5 @@ class CreateStudents < ActiveRecord::Migration[5.1]
       t.string :hometown
     end
   end
-    
+
 end
