@@ -7,7 +7,25 @@ Dir[File.join(File.dirname(__FILE__), "../lib/support", "*.rb")].each {|f| requi
 ENV["SCHOOL_ENV"] ||= "development"
 
 DBRegistry[ENV["SCHOOL_ENV"]].connect!
+
 DB = ActiveRecord::Base.connection
+
+connection = ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database => "db/artists.sqlite"
+)
+
+sql = <<-SQL
+  CREATE TABLE IF NOT EXISTS artists (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  genre TEXT,
+  age INTEGER,
+  hometown TEXT
+  )
+SQL
+ 
+ActiveRecord::Base.connection.execute(sql)
 
 if ENV["SCHOOL_ENV"] == "test"
   ActiveRecord::Migration.verbose = false
