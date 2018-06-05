@@ -10,8 +10,6 @@ DBRegistry[ENV["SCHOOL_ENV"]].connect!
 
 DB = ActiveRecord::Base.connection
 
-ActiveRecord::Base.connection.execute(sql)
-
 if ENV["SCHOOL_ENV"] == "test"
   ActiveRecord::Migration.verbose = false
 end
